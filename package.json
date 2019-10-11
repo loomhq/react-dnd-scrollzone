@@ -1,6 +1,6 @@
 {
   "name": "@loomhq/react-dnd-scrollzone",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "[forked] A cross browser solution to scrolling during drag and drop.",
   "main": "lib/index.js",
   "scripts": {
