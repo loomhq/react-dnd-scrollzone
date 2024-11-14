@@ -13,7 +13,7 @@
     "lint": "eslint src",
     "pretest": "npm run lint",
     "test": "mocha test",
-    "prepublish": "in-publish && npm run test && npm run build || not-in-publish",
+    "prepublish": "in-publish && npm run build || not-in-publish",
     "publish:major": "npm version major && npm publish",
     "publish:minor": "npm version minor && npm publish",
     "publish:patch": "npm version patch && npm publish",
@@ -82,5 +82,13 @@
     "access": "restricted",
     "registry": "https://packages.atlassian.com/api/npm/atlassian-npm/",
     "@loomhq:registry": "https://packages.atlassian.com/api/npm/atlassian-npm/"
+  },
+  "mocha": {
+    "require": [
+      "@babel/register",
+      "test/setup"
+    ],
+    "check-leaks": true,
+    "throw-deprecation": true
   }
 }
