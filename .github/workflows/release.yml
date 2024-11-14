@@ -1,6 +1,9 @@
 name: Create release and publish to NPM
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
   release:
     name: Build and deploy
@@ -23,7 +26,7 @@ jobs:
         run: pnpm install
 
       - name: Lint
-        run: pnpm lint:all
+        run: pnpm lint
 
       - name: Build
         run: pnpm build
