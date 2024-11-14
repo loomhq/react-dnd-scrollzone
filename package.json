@@ -4,9 +4,9 @@
   "description": "[forked] A cross browser solution to scrolling during drag and drop.",
   "engines": {
     "node": "^20.14.0",
-    "pnpm": "^9.12.3"
+    "yarn": "^1.22.22"
   },
-  "packageManager": "pnpm@9.12.3",
+  "packageManager": "yarn@1.22.22",
   "main": "lib/index.js",
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib",
@@ -17,11 +17,11 @@
     "publish:major": "npm version major && npm publish",
     "publish:minor": "npm version minor && npm publish",
     "publish:patch": "npm version patch && npm publish",
-    "postpublish": "git push origin master --tags"
+    "postpublish": "git push origin main --tags"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/loomhq/react-dnd-scrollzone"
+    "url": "git+https://github.com/loomhq/react-dnd-scrollzone.git"
   },
   "bugs": {
     "url": "https://github.com/loomhq/react-dnd-scrollzone/issues"
