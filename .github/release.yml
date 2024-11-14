@@ -1,0 +1,45 @@
+name: Create release and publish to NPM
+on:
+  push:
+    branches:
+      - main
+      - master
+      - devex/publish-to-pac
+jobs:
+  release:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.0.1
+        with:
+          node-version: 20.14.0
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint:all
+
+      - name: Build
+        run: pnpm build
+
+      - name: Configure NPM
+        env:
+          ARTIFACTORY_USERNAME: ${{ secrets.DEVEX_ARTIFACTORY_WRITER_USERNAME }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.DEVEX_ARTIFACTORY_WRITER_TOKEN_BASE64_ENC }}
+        run: |
+          pnpm config set "@loomhq:registry" "https://packages.atlassian.com/api/npm/atlassian-npm/"
+          pnpm config set "//packages.atlassian.com/api/npm/atlassian-npm/:username" "${ARTIFACTORY_USERNAME}"
+          pnpm config set "//packages.atlassian.com/api/npm/atlassian-npm/:_password" "${ARTIFACTORY_PASSWORD}"
+
+      - name: Publish
+        run: pnpm publish --dry-run
