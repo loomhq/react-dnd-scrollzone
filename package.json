@@ -2,6 +2,11 @@
   "name": "@loomhq/react-dnd-scrollzone",
   "version": "8.0.0",
   "description": "[forked] A cross browser solution to scrolling during drag and drop.",
+  "engines": {
+    "node": "^20.14.0",
+    "pnpm": "^9.12.3"
+  },
+  "packageManager": "pnpm@9.12.3",
   "main": "lib/index.js",
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib",
