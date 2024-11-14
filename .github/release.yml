@@ -1,10 +1,6 @@
 name: Create release and publish to NPM
 on:
-  push:
-    branches:
-      - main
-      - master
-      - devex/publish-to-pac
+  workflow_dispatch:
 jobs:
   release:
     name: Build and deploy
@@ -41,5 +37,5 @@ jobs:
           pnpm config set "//packages.atlassian.com/api/npm/atlassian-npm/:username" "${ARTIFACTORY_USERNAME}"
           pnpm config set "//packages.atlassian.com/api/npm/atlassian-npm/:_password" "${ARTIFACTORY_PASSWORD}"
 
-      - name: Publish
+      - name: Publish (dry-run)
         run: pnpm publish --dry-run
