@@ -1,9 +1,16 @@
 name: Create release and publish to NPM
 on:
   workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Dry run"
+        default: true
+        required: false
+        type: boolean
   push:
     branches:
       - main
+
 jobs:
   release:
     name: Build and deploy
@@ -41,4 +48,9 @@ jobs:
           npm config set "//packages.atlassian.com/api/npm/atlassian-npm/:_password" "${ARTIFACTORY_PASSWORD}"
 
       - name: Publish (dry-run)
+        if: inputs.dry-run
+        run: npm publish --dry-run
+
+      - name: Publish
+        if: ${{ ! inputs.dry-run }}
         run: npm publish --dry-run
